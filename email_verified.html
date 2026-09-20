@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verified - TEKRISE Golf</title>
+<meta name="description" content="Your TEKRISE email address has been verified. Open the app to log in.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#a2d147">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/vendor/fonts.css">
+<link rel="stylesheet" href="/legal.css">
+<style>
+  .verified-wrap{min-height:calc(100vh - 72px - 137px);display:flex;flex-direction:column;justify-content:center;}
+  .verified-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:32px 0 26px;}
+  .app-button{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:52px;padding:14px 24px;border:1.5px solid var(--ink);border-radius:2px;
+    background:var(--ink);color:var(--lime);text-decoration:none;
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:.12em;
+    transition:opacity .15s,transform .15s;
+  }
+  .app-button:hover{color:var(--lime);opacity:.88;transform:translateY(-1px);}
+  .app-button:focus-visible{outline:2px solid var(--tangerine);outline-offset:4px;}
+  .home-link{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;
+    color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px;
+  }
+  .home-link:hover{color:var(--tangerine);}
+  .verified-note{max-width:680px;}
+  .verified-note a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;}
+  @media(max-width:520px){
+    .verified-wrap{justify-content:flex-start;}
+    .app-button{width:100%;}
+    .verified-actions{align-items:stretch;gap:14px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .app-button{transition:none;}
+    .app-button:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <div class="nav-logo-mark">
+      <svg width="30" height="30" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><clipPath id="ballclip"><circle cx="60" cy="60" r="54"/></clipPath></defs><circle cx="60" cy="60" r="53.25" fill="#fafaf7" stroke="#0a0e0a" stroke-width="1.5"/><g clip-path="url(#ballclip)" fill="#d6d6ce"><circle cx="60" cy="16.4" r="4.1"/><circle cx="41.1" cy="27.3" r="4.1"/><circle cx="53.7" cy="27.3" r="4.1"/><circle cx="66.3" cy="27.3" r="4.1"/><circle cx="78.9" cy="27.3" r="4.1"/><circle cx="22.2" cy="38.2" r="4.1"/><circle cx="34.8" cy="38.2" r="4.1"/><circle cx="47.4" cy="38.2" r="4.1"/><circle cx="72.6" cy="38.2" r="4.1"/><circle cx="85.2" cy="38.2" r="4.1"/><circle cx="97.8" cy="38.2" r="4.1"/><circle cx="28.5" cy="49.1" r="4.1"/><circle cx="41.1" cy="49.1" r="4.1"/><circle cx="78.9" cy="49.1" r="4.1"/><circle cx="91.5" cy="49.1" r="4.1"/><circle cx="22.2" cy="60" r="4.1"/><circle cx="34.8" cy="60" r="4.1"/><circle cx="85.2" cy="60" r="4.1"/><circle cx="97.8" cy="60" r="4.1"/><circle cx="28.5" cy="70.9" r="4.1"/><circle cx="41.1" cy="70.9" r="4.1"/><circle cx="78.9" cy="70.9" r="4.1"/><circle cx="91.5" cy="70.9" r="4.1"/><circle cx="22.2" cy="81.8" r="4.1"/><circle cx="34.8" cy="81.8" r="4.1"/><circle cx="47.4" cy="81.8" r="4.1"/><circle cx="72.6" cy="81.8" r="4.1"/><circle cx="85.2" cy="81.8" r="4.1"/><circle cx="97.8" cy="81.8" r="4.1"/><circle cx="41.1" cy="92.7" r="4.1"/><circle cx="53.7" cy="92.7" r="4.1"/><circle cx="66.3" cy="92.7" r="4.1"/><circle cx="78.9" cy="92.7" r="4.1"/><circle cx="60" cy="103.6" r="4.1"/></g><path d="M 44.9 46.2 L 74.1 46.2 L 74.1 53.6 L 64.1 53.6 L 64.1 77.2 L 54.8 77.2 L 54.8 53.6 L 44.9 53.6 Z" fill="#0a0e0a"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">TEKRISE</span>
+  </a>
+  <a class="nav-back" href="/">&larr; BACK TO HOME</a>
+</nav>
+
+<div class="legal-wrap verified-wrap">
+  <div class="legal-eyebrow">ACCOUNT READY</div>
+  <h1 class="legal-title"><span class="hl">EMAIL</span> VERIFIED</h1>
+  <div class="legal-meta">
+    <span><b>Status:</b> verified</span>
+    <span><b>Next step:</b> open the app</span>
+    <!--span><b>Site:</b> <span data-site-domain></span></span-->
+  </div>
+  <p class="legal-intro">
+    Your email address has been verified. Open the TEKRISE app and log in with the email
+    you have registered.
+  </p>
+
+  <div class="verified-actions">
+    <!--a class="app-button" href="tekrise://login">OPEN TEKRISE APP</a-->
+    <a class="home-link" href="/">Back to home</a>
+  </div>
+
+  <div class="callout lime verified-note">
+    <!--div class="callout-h">If the button does not open the app</div>
+    <p>If the button does not open the app, open TEKRISE manually on your phone and log in.</p-->
+    <p>Need help? <a data-site-email href="mailto:hello@tekrise.com">Email us</a>.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wm">TEKRISE</div>
+  <div class="footer-copy">&copy; <span data-site-year></span> TEKRISE &middot; AN INDIE PROJECT</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </div>
+</footer>
+
+<script src="/site-config.js"></script>
+</body>
+</html>
