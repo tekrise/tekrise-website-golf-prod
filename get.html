@@ -6,8 +6,18 @@
 <title>Get TEKRISE Golf - Download the AI Golf App</title>
 <meta name="description" content="Download TEKRISE Golf - the AI golf swing analysis app. Opens the App Store on iPhone and Google Play on Android.">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#a2d147">
+<meta name="theme-color" content="#1f6b3a">
 <link rel="canonical" href="https://golf.tekrise.app/get">
+<!-- Link previews: this URL is what the in-app share card points to. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Get TEKRISE Golf - AI Golf Swing Analysis">
+<meta property="og:description" content="Film a golf swing on your phone and get an AI coaching report: what is working, the one thing to fix first, and a drill.">
+<meta property="og:url" content="https://golf.tekrise.app/get">
+<meta property="og:image" content="https://golf.tekrise.app/images/og-card.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="TEKRISE - AI Golf Coach">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -26,7 +36,7 @@
   }
   .store-btn:hover{transform:translateY(-1px);opacity:.9;}
   .store-btn:focus-visible{outline:2px solid var(--tangerine);outline-offset:4px;}
-  .store-btn.primary{background:var(--ink);color:var(--lime);}
+  .store-btn.primary{background:var(--ink);color:var(--accent-on-dark);}
   .store-btn svg{flex-shrink:0;}
   .store-btn .sb-text{display:flex;flex-direction:column;line-height:1.05;}
   .sb-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.72;}
@@ -35,7 +45,7 @@
     font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;
     color:var(--ink-soft);margin:2px 0 0;min-height:1.1em;
   }
-  .get-hint{max-width:640px;}
+  .get-hint{max-width:640px;margin-top:18px;}
   .get-hint a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;}
   .home-link{
     font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;
@@ -51,6 +61,7 @@
     .store-btn{transition:none;}
     .store-btn:hover{transform:none;}
   }
+  .store-btn.apk{order:9;}
 </style>
 </head>
 <body>
@@ -76,16 +87,24 @@
     and progress tracking. Install the app to analyse your own swing.
   </p>
 
-  <!-- Populated by JS when STORES_LIVE = true -->
-  <div class="store-buttons" id="getActions" hidden></div>
+  <!-- Static on purpose: visible without JavaScript and to crawlers. The store
+       links point at the real listings; before approval they open "not found",
+       and they start working the moment each listing goes public (no edit
+       needed here). The script below only reorders/highlights, hides the APK
+       on iOS and forwards phones. -->
+  <div class="store-buttons" id="getActions">
+    <a class="store-btn" id="btnAppStore" href="https://apps.apple.com/app/id6814071722" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.36 12.9c-.02-2.06 1.68-3.05 1.76-3.1-0.96-1.4-2.46-1.6-2.99-1.62-1.27-.13-2.48.75-3.13.75-.64 0-1.64-.73-2.7-.71-1.39.02-2.67.81-3.38 2.05-1.44 2.5-.37 6.2 1.03 8.23.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1.01 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.3 6.9c.56-.68.94-1.63.84-2.57-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.39-1.13z"/></svg><span class="sb-text"><span class="sb-sub">Download on the</span><span class="sb-main">App Store</span></span></a>
+    <a class="store-btn" id="btnPlay" href="https://play.google.com/store/apps/details?id=app.tekrise.golf" rel="noopener"><svg width="20" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3c-.2.2-.32.5-.32.9v17.6c0 .4.12.7.32.9l.06.05L13.5 12v-.02L3.66 2.25l-.06.05z" fill="#00c896"/><path d="M17 15.3l-3.5-3.3v-.02L17 8.7l4 2.28c1.14.65 1.14 1.72 0 2.37L17 15.3z" fill="#ff6b1a"/><path d="M17 15.3 13.5 12 3.6 21.7c.37.4.98.45 1.67.06L17 15.3z" fill="#ff4a5e"/><path d="M17 8.7 5.27 2.24C4.58 1.85 3.97 1.9 3.6 2.3L13.5 12 17 8.7z" fill="#d4af37"/></svg><span class="sb-text"><span class="sb-sub">Get it on</span><span class="sb-main">Google Play</span></span></a>
+    <!-- Direct download (sideload for regions without Google Play). The real
+         URL lives in site-config.js (apkUrl); this href is the offline fallback. -->
+    <a class="store-btn apk" id="btnApk" href="https://dl.tekrise.app/tekrise-golf.apk" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg><span class="sb-text"><span class="sb-sub">Direct download</span><span class="sb-main">Android APK</span></span></a>
+  </div>
   <p class="get-status" id="getStatus" role="status" aria-live="polite"></p>
 
-  <!-- Default / no-JS / pre-launch state -->
-  <div class="callout lime get-hint" id="comingSoon">
-    <div class="callout-h">Launching soon</div>
-    <p>TEKRISE is coming to the <b>App Store</b> and <b>Google Play</b>. Check back shortly,
-      or <a data-site-email href="mailto:hello@tekrise.app">email us</a> to hear the moment it is live.</p>
-  </div>
+  <!-- Plain mailto on purpose: NO data-site-email here — site-config.js fill()
+       replaces that element's TEXT with the address, which would turn
+       "Email us" into "hello@tekrise.app". -->
+  <p class="get-hint">Questions? <a href="mailto:hello@tekrise.app">Email us</a>.</p>
 
   <p style="margin-top:22px;"><a class="home-link" href="/">Back to home</a></p>
 </div>
@@ -104,60 +123,43 @@
 <script src="/site-config.js"></script>
 <script>
 (function () {
-  // ─────────────────────────────────────────────────────────────────────────
-  //  Flip STORES_LIVE to true once the app is live on BOTH stores. Until then
-  //  this page shows "Launching soon" and never forwards anyone to a dead
-  //  listing. The QR + link on the in-app share card point here, so this one
-  //  page controls download routing without an app release.
-  // ─────────────────────────────────────────────────────────────────────────
-  var STORES_LIVE = false;   // TODO(phase 4): true once the golf listings are live
-  var APP_STORE_URL = 'https://apps.apple.com/app/idAPPLE_APP_ID';  // TODO(phase 4): golf Apple app id (ledger V17)
-  var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.tekrise.golf';
+  // /get is the ONE download page: every homepage download CTA and the QR +
+  // link on the in-app share card (SportPack.shareUrl = <siteBaseUrl>/get)
+  // point here. The buttons are static HTML above; this only adapts them to
+  // the visitor's device.
+  var cfg = window.TEKRISE_SITE || {};
+  var appleBtn = document.getElementById('btnAppStore');
+  var playBtn = document.getElementById('btnPlay');
+  var apkBtn = document.getElementById('btnApk');
+  var status = document.getElementById('getStatus');
+
+  // The APK URL has one source of truth (site-config.js); keep the static
+  // href if that file failed to load.
+  if (cfg.apkUrl) apkBtn.href = cfg.apkUrl;
 
   var ua = navigator.userAgent || '';
   var isIOS = /iPad|iPhone|iPod/.test(ua) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS
   var isAndroid = /Android/.test(ua);
 
-  if (!STORES_LIVE) return; // keep the "Launching soon" state
+  // An APK can't be installed on iOS.
+  if (isIOS) apkBtn.parentNode.removeChild(apkBtn);
 
-  var APPLE_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.36 12.9c-.02-2.06 1.68-3.05 1.76-3.1-0.96-1.4-2.46-1.6-2.99-1.62-1.27-.13-2.48.75-3.13.75-.64 0-1.64-.73-2.7-.71-1.39.02-2.67.81-3.38 2.05-1.44 2.5-.37 6.2 1.03 8.23.68.99 1.5 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.11-.02 1.81-1.01 2.49-2 .78-1.15 1.1-2.26 1.12-2.32-.02-.01-2.15-.83-2.17-3.27zM14.3 6.9c.56-.68.94-1.63.84-2.57-.81.03-1.79.54-2.37 1.22-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.39-1.13z"/></svg>';
-  var PLAY_ICON = '<svg width="20" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.3c-.2.2-.32.5-.32.9v17.6c0 .4.12.7.32.9l.06.05L13.5 12v-.02L3.66 2.25l-.06.05z" fill="#00c896"/><path d="M17 15.3l-3.5-3.3v-.02L17 8.7l4 2.28c1.14.65 1.14 1.72 0 2.37L17 15.3z" fill="#ff6b1a"/><path d="M17 15.3 13.5 12 3.6 21.7c.37.4.98.45 1.67.06L17 15.3z" fill="#ff4a5e"/><path d="M17 8.7 5.27 2.24C4.58 1.85 3.97 1.9 3.6 2.3L13.5 12 17 8.7z" fill="#a2d147"/></svg>';
+  // The visitor's own store goes first and is highlighted.
+  if (isAndroid) playBtn.parentNode.insertBefore(playBtn, appleBtn);
+  if (isIOS) appleBtn.classList.add('primary');
+  if (isAndroid) playBtn.classList.add('primary');
 
-  function makeBtn(icon, sub, main, href, primary) {
-    var a = document.createElement('a');
-    a.className = 'store-btn' + (primary ? ' primary' : '');
-    a.href = href;
-    a.rel = 'noopener';
-    a.innerHTML = icon +
-      '<span class="sb-text"><span class="sb-sub">' + sub + '</span>' +
-      '<span class="sb-main">' + main + '</span></span>';
-    return a;
-  }
-
-  var appleBtn = makeBtn(APPLE_ICON, 'Download on the', 'App Store', APP_STORE_URL, isIOS);
-  var playBtn = makeBtn(PLAY_ICON, 'Get it on', 'Google Play', PLAY_STORE_URL, isAndroid);
-
-  var actions = document.getElementById('getActions');
-  var comingSoon = document.getElementById('comingSoon');
-  var status = document.getElementById('getStatus');
-
-  // Emphasise the visitor's platform first.
-  if (isAndroid) { actions.appendChild(playBtn); actions.appendChild(appleBtn); }
-  else { actions.appendChild(appleBtn); actions.appendChild(playBtn); }
-
-  comingSoon.hidden = true;
-  actions.hidden = false;
-
-  // Mobile: forward to the right store (a beat after paint, so the buttons are
-  // there as a fallback if the redirect is blocked).
+  // Phones: forward to their store a beat after paint, so the buttons are
+  // there as a fallback if the redirect is blocked. Same as the tennis site.
+  // Before a listing is public this lands on the store's "not found" page —
+  // accepted by the owner (2026-09-23).
   if (isIOS || isAndroid) {
-    var url = isIOS ? APP_STORE_URL : PLAY_STORE_URL;
-    var store = isIOS ? 'App Store' : 'Google Play';
-    status.textContent = 'Opening the ' + store + '…';
+    var url = isIOS ? appleBtn.href : playBtn.href;
+    status.textContent = 'Opening ' + (isIOS ? 'the App Store' : 'Google Play') + '…';
     setTimeout(function () { window.location.href = url; }, 700);
   } else {
-    status.textContent = 'On your phone? Scan the code or open this link on mobile.';
+    status.textContent = 'On your phone? Open golf.tekrise.app/get there.';
   }
 })();
 </script>

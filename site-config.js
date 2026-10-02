@@ -12,6 +12,13 @@
 (function () {
   var SITE_DOMAIN   = 'golf.tekrise.app';   // no protocol, no trailing slash
   var CONTACT_EMAIL = 'hello@tekrise.app';  // one shared inbox for both sports
+  // Direct APK download (sideload path for regions without Google Play, e.g.
+  // mainland China). Hosted on a public Cloudflare R2 bucket, NOT GitHub — the
+  // repo name must never end up in a public-facing URL. The only place this
+  // should ever be written; get.html reads it from here.
+  var APK_URL = 'https://dl.tekrise.app/tekrise-golf.apk';
+  // Donations (Ko-fi) — same shared page as tennis, not a golf-specific one.
+  var KOFI_URL = 'https://ko-fi.com/tekrise';
 
   // ---------------------------------------------------------------
   // GOLF Supabase project. Both values are PUBLIC by design (the anon key is
@@ -29,7 +36,7 @@
   // ---------------------------------------------------------------
   // Use the PUBLISHABLE key (sb_publishable_...), not the legacy `anon` JWT:
   // Supabase deletes the legacy keys in late 2026. Either works today.
-  var SUPABASE_URL = 'https://YOUR_GOLF_PROJECT_REF.supabase.co';
+  var SUPABASE_URL = 'https://vajjkbsddfmhullklrns.supabase.co';
   var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_SQgnx4PCb2-rIO7RtvNj1Q_LfUE_48o';
 
   var configured = SUPABASE_URL.indexOf('YOUR_GOLF_PROJECT_REF') === -1 &&
@@ -42,6 +49,8 @@
   window.TEKRISE_SITE = {
     domain: SITE_DOMAIN,
     email: CONTACT_EMAIL,
+    apkUrl: APK_URL,
+    kofiUrl: KOFI_URL,
     supabaseUrl: SUPABASE_URL,
     // Kept under this name: it is what createClient()'s second argument is
     // called, and reset-password.html already reads it.

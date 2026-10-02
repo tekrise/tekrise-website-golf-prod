@@ -6,11 +6,16 @@
 <title>TEKRISE Golf - AI Golf Swing Analysis</title>
 <meta name="description" content="TEKRISE Golf is an AI golf swing analysis app. Record or upload a swing and get clear technique feedback, drills and progress tracking.">
 <link rel="canonical" href="https://golf.tekrise.app/">
-<meta name="theme-color" content="#a2d147">
+<meta name="theme-color" content="#1f6b3a">
 <meta property="og:type" content="website">
 <meta property="og:title" content="TEKRISE Golf - AI Golf Swing Analysis">
 <meta property="og:description" content="Record or upload a golf swing and get clear, AI-powered technique feedback.">
 <meta property="og:url" content="https://golf.tekrise.app/">
+<meta property="og:image" content="https://golf.tekrise.app/images/og-card.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="TEKRISE - AI Golf Coach">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -19,43 +24,309 @@
 <link rel="stylesheet" href="/vendor/fonts.css">
 <link rel="stylesheet" href="/legal.css">
 <!--
-  PLACEHOLDER LANDING PAGE (multi-sport Phase 3, code step G-10).
+  HOMEPAGE v2 (2026-09-23 pre-launch content pass).
 
-  Deliberately minimal. It exists because the site root must not 404: it is
-  the developer website on both store listings and the URL AdMob crawls to
-  find /app-ads.txt, so Apple, Google and AdMob all visit it before there is
-  any marketing copy to show.
+  LAUNCH-NEUTRAL on purpose: every sentence here must be true both before and
+  after the store approvals, so launch day needs NO edit on this page. Every
+  download CTA here links to /get, which links straight to both stores.
 
-  Phase 4 replaces this with the real golf landing page (screenshots, copy
-  written for golfers, the golf mark). Until then it says only what is true:
-  the app is coming, and here is the legal + support information.
+  Claims are limited to what the golf app really does (checked against
+  GolfPack, seed/golf.sql, coach-tools.md and privacy.html): no screenshots,
+  roadmap dates or user stats exist yet, so none are shown.
 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tekrise.app/#organization",
+      "name": "TEKRISE",
+      "url": "https://tekrise.app/",
+      "email": "hello@tekrise.app"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://golf.tekrise.app/#website",
+      "url": "https://golf.tekrise.app/",
+      "name": "TEKRISE Golf",
+      "publisher": { "@id": "https://tekrise.app/#organization" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://golf.tekrise.app/#app",
+      "name": "TEKRISE Golf",
+      "description": "AI golf swing analysis. Record or upload a swing and get a score, what is working, the one thing to fix first, and a drill to fix it.",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "SportsApplication",
+      "downloadUrl": "https://golf.tekrise.app/get",
+      "image": "https://golf.tekrise.app/images/og-card.png",
+      "publisher": { "@id": "https://tekrise.app/#organization" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+</script>
 <style>
-  .home-wrap{min-height:calc(100vh - 72px - 137px);display:flex;flex-direction:column;justify-content:center;}
-  .home-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:30px 0 26px;}
-  .app-button{
-    display:inline-flex;align-items:center;justify-content:center;
-    min-height:52px;padding:14px 24px;border:1.5px solid var(--ink);border-radius:2px;
-    background:var(--ink);color:var(--lime);text-decoration:none;
-    font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:.12em;
-    transition:opacity .15s,transform .15s;
-  }
-  .app-button:hover{color:var(--lime);opacity:.88;transform:translateY(-1px);}
-  .app-button:focus-visible{outline:2px solid var(--tangerine);outline-offset:4px;}
-  .home-note{max-width:680px;}
-  .home-note a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;}
-  @media(max-width:520px){
-    .home-wrap{justify-content:flex-start;}
-    .app-button{width:100%;}
-    .home-actions{align-items:stretch;gap:14px;}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .app-button{transition:none;}
-    .app-button:hover{transform:none;}
-  }
+/* ── NAV (extends legal.css's nav/.nav-logo/.nav-logo-mark/.nav-wordmark — not redefined here) ── */
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--ink-soft);text-decoration:none;letter-spacing:-0.005em;transition:color .15s;}
+.nav-links a:hover{color:var(--ink);}
+.mobile-menu-btn{display:none;align-items:center;justify-content:center;width:42px;height:42px;background:var(--ink);border:0;border-radius:2px;cursor:pointer;flex-shrink:0;}
+.mobile-menu-btn span{position:relative;display:block;width:18px;height:2px;background:var(--accent-on-dark);transition:background .15s;}
+.mobile-menu-btn span::before,.mobile-menu-btn span::after{content:'';position:absolute;left:0;width:18px;height:2px;background:var(--accent-on-dark);transition:transform .15s,top .15s;}
+.mobile-menu-btn span::before{top:-6px;}
+.mobile-menu-btn span::after{top:6px;}
+.mobile-nav{display:none;}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 72px - 56px);}
+.hero-left{padding:72px 56px;display:flex;flex-direction:column;justify-content:space-between;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;padding:7px 12px;border:1px solid var(--ink);border-radius:2px;margin-bottom:28px;}
+.eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--tangerine);}
+h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(72px,10vw,148px);line-height:.86;letter-spacing:-0.025em;margin:0 0 32px;}
+h1 .hl{background:var(--accent);color:var(--on-accent);padding:0 16px 0 12px;margin-left:-4px;display:inline-block;line-height:.96;}
+.hero-sub{font-size:18px;font-weight:400;line-height:1.5;color:var(--ink-soft);letter-spacing:-0.005em;max-width:480px;margin-bottom:36px;}
+.hero-ctas{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap;}
+.btn-hero{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--accent-on-dark);padding:18px 26px;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.12em;border-radius:2px;transition:opacity .15s;text-decoration:none;}
+.btn-hero:hover{opacity:.85;}
+.btn-hero .arr{color:var(--cream);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--ink);padding:16.5px 22px;border:1.5px solid var(--ink);cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.1em;border-radius:2px;transition:background .15s,color .15s;}
+.btn-ghost:hover{background:var(--ink);color:var(--cream);}
+.hero-footnote{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--ink-fog);}
+.hero-footnote a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;}
+.hero-right{background:var(--accent);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:420px;padding:32px;}
+.hero-right img{width:100%;max-width:420px;height:auto;filter:drop-shadow(0 20px 40px rgba(16,38,26,.18));}
+
+/* ── TICKER ── */
+.ticker{height:56px;background:var(--ink);display:flex;align-items:center;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,255,255,.06);}
+.ticker-track{display:flex;gap:36px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.18em;animation:tick 124s linear infinite;flex-shrink:0;will-change:transform;}
+.ticker-track span{flex-shrink:0;color:var(--accent-on-dark);}
+.ticker-track .sep{color:var(--tangerine);}
+/* One loop = half the track PLUS half a gap: the flex gap sits between the halves too,
+   so plain -50% falls 18px (= gap 36px / 2) short and the ticker jumps each cycle.
+   124s keeps the old ~22px/s pace for a ~2800px loop; retune it if the words change. */
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(calc(-50% - 18px));}}
+
+/* ── SECTIONS (base) ── */
+section{border-top:1px solid var(--ink-fog2);}
+/* Anchor targets clear the sticky .site-head (118-140px incl. a wrapped banner). */
+section[id]{scroll-margin-top:140px;}
+.wrap{max-width:1440px;margin:0 auto;padding:80px 56px;}
+.eyebrow{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--ink-fog);margin-bottom:12px;}
+.eyebrow::before{content:'';display:inline-block;width:16px;height:1px;background:var(--ink);opacity:.3;}
+.sec-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5vw,72px);line-height:.88;letter-spacing:-0.02em;}
+
+/* ── DUAL-TRACK (For Golfers / For Coaches) ── */
+.tracks{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink-fog2);}
+.track{padding:44px;border-right:1px solid var(--ink-fog2);}
+.track:last-child{border-right:none;}
+.track.coach{background:var(--ink);color:var(--cream);}
+.track-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--ink-fog);margin-bottom:12px;}
+.track.coach .track-eyebrow{color:var(--accent-on-dark);}
+.track h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:38px;line-height:.92;letter-spacing:-0.01em;margin-bottom:14px;}
+.track-sub{font-size:15px;line-height:1.55;color:var(--ink-soft);margin-bottom:22px;}
+.track.coach .track-sub{color:rgba(255,255,255,.7);}
+.track-list{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;}
+.track-pt{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.5;}
+.track-pt::before{content:'';width:13px;height:13px;flex-shrink:0;margin-top:3px;background:var(--accent);border-radius:1px;}
+.track.coach .track-pt::before{background:var(--accent-on-dark);}
+
+/* ── FUNDING (Ko-fi) ── */
+.funding{padding:80px 56px;background:var(--cream2);border-top:1px solid var(--ink-fog2);border-bottom:1px solid var(--ink-fog2);}
+.funding-grid{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;}
+.f-eyebrow{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--ink-fog);margin-bottom:14px;}
+.f-eyebrow::before{content:'';width:16px;height:1px;background:var(--ink);opacity:.3;}
+.f-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5vw,76px);line-height:.88;letter-spacing:-0.02em;margin-bottom:24px;}
+.f-title em{font-style:normal;background:var(--accent);color:var(--on-accent);padding:0 12px;display:inline-block;}
+.f-sub{font-size:17px;line-height:1.55;color:var(--ink-soft);max-width:480px;margin-bottom:32px;}
+.funding-right{background:var(--ink);color:var(--cream);padding:36px;border-radius:2px;position:relative;overflow:hidden;}
+.fr-corner{position:absolute;top:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--accent-on-dark);opacity:.7;}
+.fr-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--accent-on-dark);margin-bottom:8px;}
+.fr-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.01em;margin-bottom:18px;line-height:1.05;}
+.fr-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.fr-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;color:rgba(255,255,255,.85);}
+.fr-item::before{content:'✓';color:var(--accent-on-dark);font-weight:700;flex-shrink:0;}
+.fr-cta{display:block;width:100%;background:var(--accent-on-dark);color:var(--ink);padding:14px;text-align:center;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.12em;border-radius:2px;text-decoration:none;transition:opacity .15s;}
+.fr-cta:hover{opacity:.85;}
+.fr-note{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.4);text-align:center;margin-top:10px;}
+
+/* ── WALKTHROUGH (replaces an app-screenshot gallery — none exist yet) ── */
+.app-gallery{background:var(--ink);color:var(--cream);padding:80px 56px;border-top:1px solid var(--ink-fog2);}
+.app-gallery-wrap{max-width:1440px;margin:0 auto;}
+.app-gallery .eyebrow{color:rgba(255,255,255,.5);}
+.app-gallery .eyebrow::before{background:var(--accent-on-dark);opacity:1;}
+.app-gallery h2{color:var(--cream);}
+.app-gallery .sec-title em{font-style:normal;background:var(--accent-on-dark);color:var(--ink);padding:0 12px;display:inline-block;}
+.app-gallery .lead{font-size:16px;line-height:1.55;color:rgba(255,255,255,.6);max-width:540px;margin:18px 0 48px;}
+.screens-row{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;align-items:start;}
+.screen-card{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.screen-frame{width:100%;max-width:280px;background:transparent;margin-bottom:16px;}
+.screen-frame img{width:100%;height:auto;display:block;}
+.screen-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;color:var(--accent-on-dark);margin-bottom:4px;}
+.screen-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.04em;color:var(--cream);margin-bottom:6px;line-height:1.1;}
+.screen-desc{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.6);max-width:320px;line-height:1.5;}
+
+/* ── HOW IT WORKS ── */
+.how-grid{display:grid;grid-template-columns:1fr;border:1px solid var(--ink-fog2);}
+.how-left{padding:52px;}
+.how-step{display:flex;align-items:flex-start;gap:18px;padding:20px 0;border-top:1px solid var(--ink-fog2);}
+.how-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;color:var(--accent);line-height:1;flex-shrink:0;width:36px;}
+.how-title{font-size:16px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tag{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;background:var(--cream2);color:var(--ink-soft);padding:2px 7px;border-radius:1px;}
+.tag.accent{background:var(--accent);color:var(--on-accent);}
+.how-desc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+
+/* ── FAQ ── */
+.faq-grid{border:1px solid var(--ink-fog2);}
+.faq-item{border-bottom:1px solid var(--ink-fog2);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{width:100%;padding:20px 28px;border:0;background:none;color:inherit;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;line-height:inherit;letter-spacing:.01em;transition:background .15s;}
+.faq-q:hover{background:var(--cream2);}
+.faq-q:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;}
+.faq-q::after{content:'+';flex-shrink:0;font-size:24px;font-weight:300;color:var(--ink-fog);transition:transform .2s;line-height:1;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+/* 0fr→1fr opens to the answer's real height, so no answer is ever clipped (a
+   fixed max-height cap was). Closed answers are also hidden from Tab/readers. */
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease,padding .3s ease;padding:0 28px;}
+.faq-item.open .faq-a{grid-template-rows:1fr;padding:0 28px 24px;}
+.faq-a-inner{min-height:0;overflow:hidden;visibility:hidden;transition:visibility .3s;font-size:14px;line-height:1.65;color:var(--ink-soft);}
+.faq-item.open .faq-a-inner{visibility:visible;}
+
+/* ── COACHES (partner program) ── */
+.coach-models{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.14);}
+.cmodel{padding:26px 24px;border-right:1px solid rgba(255,255,255,.14);}
+.cmodel:last-child{border-right:none;}
+.cmodel-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px;color:var(--accent-on-dark);line-height:1;margin-bottom:12px;}
+.cmodel-t{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;letter-spacing:.01em;margin-bottom:8px;}
+.cmodel-d{font-size:13px;line-height:1.55;color:rgba(255,255,255,.6);}
+.coach-cta-row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:32px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1);}
+.coach-cta-txt{font-size:15px;color:rgba(255,255,255,.7);max-width:520px;}
+.agf-cta{background:var(--accent-on-dark);color:var(--ink);padding:12px 22px;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;border-radius:2px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s;}
+.agf-cta:hover{opacity:.85;}
+
+/* ── COMMUNITY (Telegram) ── */
+.community{display:grid;grid-template-columns:1fr 220px;gap:48px;align-items:center;border:1px solid var(--ink-fog2);background:var(--cream2);border-radius:2px;padding:44px 48px;margin-bottom:40px;position:relative;overflow:hidden;}
+.community::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--accent);}
+.community-badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:var(--ink-soft);margin-bottom:16px;text-transform:uppercase;}
+.community-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(0,200,150,.5);animation:cpulse 2.2s infinite;}
+@keyframes cpulse{0%{box-shadow:0 0 0 0 rgba(0,200,150,.45);}70%{box-shadow:0 0 0 8px rgba(0,200,150,0);}100%{box-shadow:0 0 0 0 rgba(0,200,150,0);}}
+.community-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,40px);line-height:1.05;letter-spacing:.01em;margin-bottom:14px;}
+.community-copy{font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:520px;margin-bottom:26px;}
+.community-copy strong{color:var(--ink);}
+.tg-btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;padding:15px 26px;border-radius:2px;text-decoration:none;transition:transform .15s,background .15s;text-transform:uppercase;}
+.tg-btn:hover{background:#1c8adb;transform:translateX(3px);}
+.tg-btn svg{width:20px;height:20px;flex-shrink:0;}
+.community-qr{background:var(--cream);border:1px solid var(--ink-fog2);border-radius:2px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.community-qr img{width:180px;height:180px;display:block;image-rendering:crisp-edges;}
+.community-qr span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--ink-fog);text-transform:uppercase;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:420px 1fr;border:1px solid var(--ink-fog2);}
+.contact-l{padding:52px 48px;border-right:1px solid var(--ink-fog2);display:flex;flex-direction:column;gap:28px;}
+.cmethod{display:flex;align-items:center;gap:14px;padding:16px 0;border-top:1px solid var(--ink-fog2);}
+.cico{width:36px;height:36px;background:var(--cream2);border:1px solid var(--ink-fog2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+.cml{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--ink-fog);margin-bottom:2px;}
+.cmv{font-size:14px;font-weight:500;}
+.contact-r{padding:52px 56px;}
+.form-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;letter-spacing:.02em;margin-bottom:28px;}
+.form-grid{display:flex;flex-direction:column;gap:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.ff label,.ff .ff-label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:var(--ink-soft);margin-bottom:6px;}
+.ff input,.ff textarea{width:100%;height:44px;background:var(--cream2);border:1px solid var(--ink-fog2);border-radius:2px;padding:0 14px;font-family:'Inter Tight',sans-serif;font-size:14px;color:var(--ink);outline:none;appearance:none;transition:border-color .15s;}
+.ff input:focus,.ff textarea:focus{border-color:var(--ink);}
+.ff textarea{height:110px;padding:14px;resize:vertical;}
+.role-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.rchip{padding:8px 14px;border:1px solid var(--ink-fog2);border-radius:2px;background:none;color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;line-height:inherit;letter-spacing:.06em;cursor:pointer;transition:background .15s,border-color .15s;}
+.rchip.on{background:var(--accent);border-color:var(--ink);color:var(--on-accent);}
+.rchip:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+
+/* ── STICKY HEADER (banner + nav) ──
+   ONE sticky wrapper instead of two sticky bars with a hard-coded offset: the
+   banner's height changes with width and wrapping (≈50px desktop, ≈68px at
+   320px), so a fixed `nav{top:38px}` slid the nav under it. */
+.site-head{position:sticky;top:0;z-index:101;}
+.site-head nav{position:relative;top:0;}   /* relative: anchors .mobile-nav */
+
+/* ── CAMPAIGN BANNER ── */
+.campaign-bar{background:var(--ink);color:var(--cream);padding:10px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;}
+.cb-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--coral);margin-right:8px;animation:cbpulse 1.5s ease-in-out infinite;}
+@keyframes cbpulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.cb-left{display:flex;align-items:center;min-width:0;}
+.cb-text-mobile{display:none;}
+.cb-mid{display:flex;align-items:center;gap:24px;color:var(--accent-on-dark);}
+.cb-mid b{color:var(--cream);font-weight:600;}
+.cb-cta{background:var(--accent-on-dark);color:var(--ink);padding:6px 14px;border-radius:2px;text-decoration:none;font-weight:700;font-size:11px;letter-spacing:.12em;transition:opacity .15s;white-space:nowrap;}
+.cb-cta:hover{opacity:.85;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .hero-left{padding:52px 32px;}
+  .wrap{padding:64px 32px;}
+  .funding{padding:64px 32px;}
+  .funding-grid{grid-template-columns:1fr;gap:36px;}
+  .cb-mid span:last-child{display:none;}   /* keeps the banner one line down to 861px */
+  .app-gallery{padding:64px 32px;}
+  .coach-models{grid-template-columns:1fr 1fr;}
+  .cmodel:nth-child(2){border-right:none;}
+  .cmodel:nth-child(3),.cmodel:nth-child(4){border-top:1px solid rgba(255,255,255,.14);}
+}
+@media(max-width:860px){
+  .campaign-bar{padding:8px 20px;font-size:9px;flex-wrap:wrap;gap:8px;}
+  .app-gallery{padding:52px 20px;}
+  .screens-row{grid-template-columns:1fr;gap:28px;}
+  .cb-mid{display:none;}
+  .cb-text-desktop{display:none;}
+  .cb-text-mobile{display:inline;line-height:1.45;color:var(--accent-on-dark);}
+  .cb-text-mobile b{color:var(--cream);font-weight:600;}
+  .cb-left{flex:1;align-items:center;}
+  .cb-cta{flex-shrink:0;}
+  .nav-links{display:none;}
+  .mobile-menu-btn{display:inline-flex;}
+  nav.open .mobile-menu-btn span{background:transparent;}
+  nav.open .mobile-menu-btn span::before{top:0;transform:rotate(45deg);}
+  nav.open .mobile-menu-btn span::after{top:0;transform:rotate(-45deg);}
+  .mobile-nav{position:absolute;top:72px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--ink-fog2);padding:8px 20px 18px;box-shadow:0 16px 28px rgba(16,38,26,.08);}
+  nav.open .mobile-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .mobile-nav a{display:flex;align-items:center;min-height:44px;padding:10px 12px;background:var(--cream2);color:var(--ink);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.08em;border-radius:2px;}
+  .hero{grid-template-columns:1fr;}
+  .hero-right{min-height:320px;}
+  .hero-left{padding:48px 20px;}
+  h1{font-size:72px;}
+  .wrap{padding:52px 20px;}
+  .funding{padding:52px 20px;}
+  .funding-right{padding:24px;}
+  .fr-corner{display:none;}   /* collides with .fr-lbl at phone width; decorative */
+  .contact-grid{grid-template-columns:1fr;}
+  .contact-l{border-right:none;border-bottom:1px solid var(--ink-fog2);padding:36px 20px;}
+  .contact-r{padding:36px 20px;}
+  .community{grid-template-columns:1fr;gap:32px;padding:36px 28px;justify-items:center;text-align:center;}
+  .community::before{width:100%;height:6px;}
+  .community-badge{justify-content:center;}
+  .community-copy{margin-left:auto;margin-right:auto;}
+  .tracks{grid-template-columns:1fr;}
+  .track{border-right:none;border-bottom:1px solid var(--ink-fog2);}
+  .track:last-child{border-bottom:none;}
+  .coach-models{grid-template-columns:1fr;}
+  .cmodel{border-right:none;border-bottom:1px solid rgba(255,255,255,.14);}
+  .cmodel:last-child{border-bottom:none;}
+}
 </style>
 </head>
 <body>
+
+<!-- CAMPAIGN BANNER -->
+<header class="site-head">
+<div class="campaign-bar">
+  <div class="cb-left"><span class="cb-pulse"></span><span class="cb-text-desktop">AN INDEPENDENT PROJECT</span><span class="cb-text-mobile"><b>FREE</b> TO START<br>NO CARD, NO ACCOUNT</span></div>
+  <div class="cb-mid">
+    <span><b>FREE</b> TO START</span>
+    <span>iPHONE &amp; ANDROID</span>
+    <span>NO CARD, NO ACCOUNT NEEDED</span>
+  </div>
+  <a class="cb-cta" href="/get">GET THE APP →</a>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -67,34 +338,321 @@
     </div>
     <span class="nav-wordmark">TEKRISE</span>
   </a>
-  <a class="nav-back" href="/get">GET THE APP &rarr;</a>
+  <div class="nav-links">
+    <a href="#players">For Golfers</a>
+    <a href="#coaches">For Coaches</a>
+    <a href="#how">How It Works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact us</a>
+  </div>
+  <button class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav(this)"><span></span></button>
+  <div class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#players" onclick="closeMobileNav()">For Golfers</a>
+    <a href="#coaches" onclick="closeMobileNav()">For Coaches</a>
+    <a href="#how" onclick="closeMobileNav()">How It Works</a>
+    <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact us</a>
+  </div>
 </nav>
+</header>
 
-<div class="legal-wrap home-wrap">
-  <div class="legal-eyebrow">TEKRISE GOLF</div>
-  <h1 class="legal-title"><span class="hl">AI GOLF</span> SWING ANALYSIS</h1>
-  <div class="legal-meta">
-    <span><b>Status:</b> coming soon</span>
-    <span><b>Site:</b> <span data-site-domain></span></span>
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-eyebrow"><div class="eyebrow-dot"></div>AI GOLF SWING ANALYSIS</div>
+      <h1>SEE<br>WHAT<br><span class="hl">YOU MISS</span></h1>
+      <p class="hero-sub">Film one swing on your phone. TEKRISE Golf's AI coach watches it and tells you what is working, the one thing to fix first, and a drill to fix it.</p>
+      <div class="hero-ctas">
+        <a class="btn-hero" href="/get">GET THE APP <span class="arr">→</span></a>
+        <button class="btn-ghost" onclick="document.getElementById('coaches').scrollIntoView({behavior:'smooth'})">I'M A COACH →</button>
+      </div>
+      <div class="hero-footnote">FREE TO START · iPHONE &amp; ANDROID · <a href="/get">ANDROID APK ALSO AVAILABLE</a></div>
+    </div>
   </div>
-  <p class="legal-intro">
-    Record or upload a short golf swing and TEKRISE Golf breaks down your technique:
-    what is working, the one thing to fix first, and a drill to fix it.
-  </p>
-
-  <div class="home-actions">
-    <a class="app-button" href="/get">GET THE APP</a>
-  </div>
-
-  <div class="callout lime home-note">
-    <div class="callout-h">Already using TEKRISE for tennis?</div>
-    <p>
-      TEKRISE Golf is a separate app with its own account. Your tennis swings, history
-      and subscription stay in the tennis app at <a href="https://tekrise.app">tekrise.app</a>.
-    </p>
-    <p>Questions? <a data-site-email href="mailto:hello@tekrise.app">Email us</a>.</p>
+  <div class="hero-right">
+    <img src="images/impact-swing.svg" alt="Illustration of a golfer at impact, mid-downswing, with a phone on a tripod recording from the side" width="800" height="1000">
   </div>
 </div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <!-- Two IDENTICAL halves (the loop scrolls one half, see @keyframes tick).
+         Each half is the sequence TWICE so it stays wider than a large monitor;
+         a half narrower than the viewport shows a blank tail before the loop. -->
+    <span>DRIVER</span><span class="sep">◆</span><span>IRON</span><span class="sep">◆</span>
+    <span>AI COACHING REPORT</span><span class="sep">◆</span>
+    <span>ONE FIX · ONE DRILL</span><span class="sep">◆</span>
+    <span>13 LANGUAGES</span><span class="sep">◆</span>
+    <span>FREE TO START</span><span class="sep">◆</span>
+    <span>DRIVER</span><span class="sep">◆</span><span>IRON</span><span class="sep">◆</span>
+    <span>AI COACHING REPORT</span><span class="sep">◆</span>
+    <span>ONE FIX · ONE DRILL</span><span class="sep">◆</span>
+    <span>13 LANGUAGES</span><span class="sep">◆</span>
+    <span>FREE TO START</span><span class="sep">◆</span>
+    <span>DRIVER</span><span class="sep">◆</span><span>IRON</span><span class="sep">◆</span>
+    <span>AI COACHING REPORT</span><span class="sep">◆</span>
+    <span>ONE FIX · ONE DRILL</span><span class="sep">◆</span>
+    <span>13 LANGUAGES</span><span class="sep">◆</span>
+    <span>FREE TO START</span><span class="sep">◆</span>
+    <span>DRIVER</span><span class="sep">◆</span><span>IRON</span><span class="sep">◆</span>
+    <span>AI COACHING REPORT</span><span class="sep">◆</span>
+    <span>ONE FIX · ONE DRILL</span><span class="sep">◆</span>
+    <span>13 LANGUAGES</span><span class="sep">◆</span>
+    <span>FREE TO START</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- TWO TRACKS: GOLFERS / COACHES -->
+<section id="players">
+  <div class="wrap">
+    <div class="eyebrow">ONE APP · TWO WAYS IN</div>
+    <h2 class="sec-title" style="margin-bottom:28px;">Built for golfers —<br>and the coaches behind them.</h2>
+    <div class="tracks">
+      <div class="track">
+        <div class="track-eyebrow">— FOR GOLFERS</div>
+        <h3>See what you<br>can't see.</h3>
+        <p class="track-sub">Most swing faults are hard to see while you're making the swing. TEKRISE Golf shows you what your swing is doing, and what to work on next.</p>
+        <div class="track-list">
+          <div class="track-pt"><span><strong>Training with a coach?</strong> Practise the right things between lessons, and share swings with your coach for notes.</span></div>
+          <div class="track-pt"><span><strong>No coach?</strong> Get clear, specific feedback on every swing you film, on your own schedule.</span></div>
+          <div class="track-pt"><span>Every analysis is saved, so you can look back and see how your swing is changing.</span></div>
+        </div>
+        <button class="btn-hero" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">SEE HOW IT WORKS <span class="arr">→</span></button>
+      </div>
+      <div class="track coach">
+        <div class="track-eyebrow">— FOR COACHES</div>
+        <h3>Your students'<br>homework, handled.</h3>
+        <p class="track-sub">TEKRISE is the homework, not the teacher. It keeps your students practising what you taught, and lets them send you their swings between lessons.</p>
+        <div class="track-list">
+          <div class="track-pt"><span>Students arrive having worked on the right things, so lesson time goes further.</span></div>
+          <div class="track-pt"><span>See the swings your students share with you, and send notes back.</span></div>
+          <div class="track-pt"><span>Students join you with your personal invite code.</span></div>
+        </div>
+        <button class="btn-hero" style="background:var(--accent-on-dark);color:var(--ink);" onclick="document.getElementById('coaches').scrollIntoView({behavior:'smooth'})">HOW WE WORK WITH COACHES <span style="color:var(--ink);">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="how-grid">
+      <div class="how-left">
+        <div class="eyebrow">HOW IT WORKS</div>
+        <h2 class="sec-title">HOW IT<br>WORKS</h2>
+        <div style="margin-top:36px;">
+          <div class="how-step">
+            <div class="how-n">01</div>
+            <div><div class="how-title">Film your swing <span class="tag">ON YOUR PHONE</span></div>
+            <div class="how-desc">Driver or iron, address through finish. Prop your phone up or ask a friend to hold it, or upload a swing you already filmed.</div></div>
+          </div>
+          <div class="how-step">
+            <div class="how-n">02</div>
+            <div><div class="how-title">Pick the swing, send a short clip <span class="tag">UP TO 4 SECONDS · NO SOUND</span></div>
+            <div class="how-desc">The app finds your swing and trims it to a clip of up to 4 seconds. Only that clip is uploaded, without sound. Your full recording stays on your phone.</div></div>
+          </div>
+          <div class="how-step">
+            <div class="how-n">03</div>
+            <div><div class="how-title">Get your coaching report <span class="tag accent">SCORE · FIX · DRILL</span></div>
+            <div class="how-desc">An AI coach watches the clip and gives you a score out of 100, what's working, the one thing to fix first, and a drill to fix it. Every report is saved, so you can see how your swing changes over time.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILMING TIPS (brand illustrations: there are no app screenshots yet) -->
+<section class="app-gallery" id="walkthrough">
+  <div class="app-gallery-wrap">
+    <div class="eyebrow">BEFORE YOU FILM</div>
+    <h2 class="sec-title">Getting good<br>footage <em>matters</em>.</h2>
+    <p class="lead">The AI coach can only judge what the camera sees. Two minutes of setup gets you a far more useful report.</p>
+    <div class="screens-row">
+      <div class="screen-card">
+        <div class="screen-frame"><img src="images/camera-position.svg" alt="Illustration of a golfer at address over a teed ball, with two phones on tripods: one behind the golfer on the target line, one facing the golfer" width="800" height="1000" loading="lazy"></div>
+        <div class="screen-num">01</div>
+        <div class="screen-name">CHOOSE YOUR ANGLE</div>
+        <div class="screen-desc">Face-on (facing you) shows weight shift, ball position and sway. Down-the-line (behind you, looking at the target) shows swing plane and club path.</div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-frame"><img src="images/impact-swing.svg" alt="Illustration of a golfer mid-downswing at impact, weight on the lead leg" width="800" height="1000" loading="lazy"></div>
+        <div class="screen-num">02</div>
+        <div class="screen-name">GET THE WHOLE SWING IN</div>
+        <div class="screen-desc">Film address through finish, with your whole body and the club in the frame the whole time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR COACHES (detail) -->
+<section id="coaches" style="background:var(--ink);color:var(--cream);border-top:1px solid rgba(255,255,255,.06);">
+  <div class="wrap">
+    <div class="eyebrow" style="color:rgba(255,255,255,.5);">FOR COACHES · PARTNER WITH US</div>
+    <h2 class="sec-title" style="color:var(--cream);">TEKRISE works for you.</h2>
+    <p class="lead" style="font-size:16px;line-height:1.55;color:rgba(255,255,255,.65);max-width:560px;margin:18px 0 44px;">A good coach gives an hour a week. The rest of the time, students practise blind and can quietly undo your work. TEKRISE helps close that gap.</p>
+    <div class="coach-models">
+      <div class="cmodel"><div class="cmodel-n">01</div><div class="cmodel-t">Swings they share</div><div class="cmodel-d">Students choose which swings to send you. Watch each clip with its AI report and walk into the lesson knowing what to work on.</div></div>
+      <div class="cmodel"><div class="cmodel-n">02</div><div class="cmodel-t">Notes back to them</div><div class="cmodel-d">Write feedback on any swing a student shares. They get a notification and see your notes next to that swing.</div></div>
+      <div class="cmodel"><div class="cmodel-n">03</div><div class="cmodel-t">Badges &amp; directory</div><div class="cmodel-d">Earn coach badges as you take on students and review their swings, and choose to appear in the in-app coach directory so new students can find you.</div></div>
+      <div class="cmodel"><div class="cmodel-n">04</div><div class="cmodel-t">Your invite code</div><div class="cmodel-d">Give students your personal code. They join you in one step, and either of you can end the link at any time.</div></div>
+    </div>
+    <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,.5);margin-top:18px;">Coach tools need a signed-in account with a verified email, for you and for your students.</p>
+    <div class="coach-cta-row">
+      <div class="coach-cta-txt">Run a club or academy, or want to become a partner coach? Partner coaches can earn a share of what their students pay, with terms agreed with each partner. Let's talk.</div>
+      <a class="agf-cta" href="#contact" onclick="var r=Array.from(document.querySelectorAll('.rchip')).find(function(c){return c.textContent.trim()==='Coach';}); if(r){selectRole(r);}">PARTNER WITH US →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">FREQUENTLY ASKED</div>
+    <h2 class="sec-title" style="margin-bottom:32px;">Got questions?<br>We've got answers.</h2>
+    <div class="faq-grid">
+      <div class="faq-item open">
+        <button type="button" class="faq-q" aria-expanded="true" onclick="toggleFaq(this)">Will TEKRISE replace my golf coach?</button>
+        <div class="faq-a"><div class="faq-a-inner">No, and it's not meant to. TEKRISE looks at your swing from your own phone footage and tells you what it sees. It can't watch you in person, adjust your grip or set-up, or read a course the way a coach can. Think of it as a second pair of eyes between lessons.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">I don't have a coach. Is this still for me?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. If you practise on your own, TEKRISE Golf gives you the clear, specific feedback that's hard to get without someone watching, so you work on the right thing next instead of grooving the same mistake.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Which clubs does it work with?</button>
+        <div class="faq-a"><div class="faq-a-inner">Full swings with a driver or an iron. You tell the app which one you're swinging before the analysis.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How accurate is the AI?</button>
+        <div class="faq-a"><div class="faq-a-inner">It judges your technique from what one phone camera can see, and it's genuinely useful for spotting the patterns that matter. It is <strong>not</strong> a launch monitor: it doesn't measure ball flight, club speed or spin. The camera angle matters too. A face-on view can't show swing plane well, and a down-the-line view can't show sway well, so the report says so rather than guessing. Good footage gets you better feedback.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my video private?</button>
+        <div class="faq-a"><div class="faq-a-inner">Your full recording stays on your phone. Only a short clip of the swing (up to 4 seconds, with the sound removed) is uploaded for the analysis. Clips aren't public, and a coach sees one only if you choose to share it with them. The details are in our <a href="/privacy" style="color:inherit;font-weight:700;">privacy policy</a>.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is the app really free?</button>
+        <div class="faq-a"><div class="faq-a-inner">It's free to start: no credit card, and you don't even need an account. Free analyses are paid for by a short video ad. Optional paid plans give you more analyses, and the app shows their prices in your own currency.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Does it work on iPhone and Android?</button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, both. <a href="/get" style="color:inherit;font-weight:700;">Get the app →</a></div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Which languages does it speak?</button>
+        <div class="faq-a"><div class="faq-a-inner">The app is available in 13 languages, and your AI coach writes its report in the language you choose in the app.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">I'm a coach. How does TEKRISE help me?</button>
+        <div class="faq-a"><div class="faq-a-inner">Your students practise the right things between lessons, and they can share swings with you. You watch each shared clip with its report and send notes back. Students join you with your invite code, and you can choose to appear in the in-app coach directory. <a href="#coaches" style="color:inherit;font-weight:700;">See For Coaches →</a></div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I delete my account?</button>
+        <div class="faq-a"><div class="faq-a-inner">Email us from the address on your account and we'll delete it and confirm by email. The full steps are on our <a href="/delete-account" style="color:inherit;font-weight:700;">delete account</a> page.</div></div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How can I support TEKRISE Golf?</button>
+        <div class="faq-a"><div class="faq-a-inner">Use the app and tell us what to improve: feedback shapes what we build next. If you'd like to chip in, you can make a <a href="#funding" style="color:inherit;font-weight:700;">one-off donation on Ko-fi</a>. Questions? Email <strong><a href="mailto:hello@tekrise.app">hello@tekrise.app</a></strong>.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT (Ko-fi): the ONE donation block on the page -->
+<section class="funding" id="funding">
+  <div class="funding-grid">
+    <div>
+      <div class="f-eyebrow">SUPPORT THE PROJECT</div>
+      <h2 class="f-title">Enjoying it?<br><em>Chip in</em>.</h2>
+      <p class="f-sub">TEKRISE Golf is built by the same small, independent team behind TEKRISE tennis. We have no outside investors: the app is funded by subscriptions, ads and donations.</p>
+      <p class="f-sub">Our promise: there will always be a <strong>free tier</strong>, so anyone can get real feedback on their swing, with a coach or without one.</p>
+    </div>
+    <div class="funding-right">
+      <div class="fr-corner">★ INDEPENDENT</div>
+      <div class="fr-lbl">— WHERE YOUR DONATION GOES</div>
+      <div class="fr-title">A little goes<br>a long way.</div>
+      <div class="fr-list">
+        <div class="fr-item">Keeps the free tier open to golfers who can't afford coaching</div>
+        <div class="fr-item">Pays the server &amp; AI costs behind every analysis</div>
+        <div class="fr-item">Funds new features</div>
+        <div class="fr-item">Keeps us independent, with no investors pulling the strings</div>
+      </div>
+      <a class="fr-cta" href="#" onclick="openPledge();return false;">DONATE ON KO-FI →</a>
+      <div class="fr-note">ANY AMOUNT · HANDLED SECURELY BY KO-FI</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:28px;">GET IN TOUCH</div>
+
+    <!-- COMMUNITY (Telegram — shared with tennis) -->
+    <div class="community">
+      <div>
+        <div class="community-badge"><span class="dot"></span>Join the community</div>
+        <h2 class="community-title">Built with players,<br>not just for them.</h2>
+        <p class="community-copy">TEKRISE is a <strong>community-first project</strong> — your feedback shapes what we build next. This is the same Telegram group as TEKRISE tennis: hop in to share ideas, report what's not working, ask for a feature, or just talk shop. We'd genuinely love to have you.</p>
+        <a class="tg-btn" href="https://t.me/+8s8jccOt0UswNWY1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          Join on Telegram
+        </a>
+      </div>
+      <div class="community-qr">
+        <img src="images/telegram-qr.png" alt="Scan to join the TEKRISE Telegram community" width="180" height="180">
+        <span>Scan to join</span>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-l">
+        <div>
+          <h2 class="sec-title" style="font-size:clamp(40px,4vw,62px);margin-bottom:18px;">We'd love<br>to hear<br>from you.</h2>
+          <p style="font-size:15px;line-height:1.6;color:var(--ink-soft);">Whether you're a golfer with feedback, a coach wanting to partner, or a journalist covering golf tech — drop us a line.</p>
+        </div>
+        <div>
+          <div class="cmethod"><div class="cico">✉</div><div><div class="cml">General</div><div class="cmv"><a href="mailto:hello@tekrise.app">hello@tekrise.app</a></div></div></div>
+          <div class="cmethod"><div class="cico">🤝</div><div><div class="cml">Partnerships &amp; Clubs</div><div class="cmv"><a href="mailto:partnerships@tekrise.app">partnerships@tekrise.app</a></div></div></div>
+          <div class="cmethod"><div class="cico">🐛</div><div><div class="cml">Bug reports</div><div class="cmv"><a href="mailto:bugs@tekrise.app">bugs@tekrise.app</a></div></div></div>
+        </div>
+      </div>
+      <div class="contact-r">
+        <div class="form-title">Send us a message</div>
+        <form class="form-grid" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="ff"><label for="f-first">FIRST NAME</label><input id="f-first" type="text" placeholder="Alex"></div>
+            <div class="ff"><label for="f-last">LAST NAME</label><input id="f-last" type="text" placeholder="Kowalski"></div>
+          </div>
+          <div class="ff"><label for="f-email">EMAIL</label><input id="f-email" type="email" required placeholder="you@email.com"></div>
+          <div class="ff">
+            <span class="ff-label" id="role-label">I AM A...</span>
+            <div class="role-chips" role="group" aria-labelledby="role-label">
+              <button type="button" class="rchip on" aria-pressed="true" onclick="selectRole(this)">Golfer</button>
+              <button type="button" class="rchip" aria-pressed="false" onclick="selectRole(this)">Coach</button>
+              <button type="button" class="rchip" aria-pressed="false" onclick="selectRole(this)">Club</button>
+              <button type="button" class="rchip" aria-pressed="false" onclick="selectRole(this)">Press</button>
+              <button type="button" class="rchip" aria-pressed="false" onclick="selectRole(this)">Other</button>
+            </div>
+          </div>
+          <div class="ff"><label for="f-message">MESSAGE</label><textarea id="f-message" required placeholder="Tell us what's on your mind..."></textarea></div>
+          <button type="submit" class="btn-hero" style="width:100%;justify-content:space-between;" id="submit-btn">
+            <span>SEND MESSAGE</span><span class="arr">→</span>
+          </button>
+          <div id="form-status" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-soft);min-height:14px;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -109,5 +667,90 @@
 </footer>
 
 <script src="/site-config.js"></script>
+<!-- Supabase JS client (for the feedback form). Deferred: only needed on submit. -->
+<script src="vendor/supabase-js-2.58.0.min.js" defer></script>
+<script>
+  const cfg = window.TEKRISE_SITE || {};
+  const KOFI_URL = cfg.kofiUrl || 'https://ko-fi.com/tekrise';
+  let sbClient = null;
+  function supabaseClient() {
+    if (!sbClient) {
+      sbClient = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+    }
+    return sbClient;
+  }
+  function selectRole(el) {
+    document.querySelectorAll('.rchip').forEach(c => {
+      c.classList.toggle('on', c === el);
+      c.setAttribute('aria-pressed', String(c === el));
+    });
+  }
+  function toggleFaq(btn) {
+    const isOpen = btn.parentElement.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  }
+  function toggleMobileNav(btn) {
+    const nav = btn.closest('nav');
+    const isOpen = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  }
+  function closeMobileNav() {
+    const nav = document.querySelector('nav');
+    const btn = document.querySelector('.mobile-menu-btn');
+    if (!nav || !btn) return;
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const status = document.getElementById('form-status');
+    const selectedRole = document.querySelector('.rchip.on');
+    const payload = {
+      first_name: document.getElementById('f-first').value.trim() || null,
+      last_name:  document.getElementById('f-last').value.trim()  || null,
+      email:      document.getElementById('f-email').value.trim(),
+      role:       selectedRole ? selectedRole.textContent.trim() : null,
+      message:    document.getElementById('f-message').value.trim(),
+    };
+    btn.disabled = true;
+    status.style.color = 'var(--ink-soft)';
+    status.textContent = 'SENDING…';
+    // try/catch: if supabase-js failed to load, supabaseClient() throws and the
+    // button would stay disabled on "SENDING…" forever.
+    let error;
+    try {
+      ({ error } = await supabaseClient().from('feedback').insert(payload));
+    } catch (err) {
+      error = err;
+    }
+    if (error) {
+      btn.disabled = false;
+      status.style.color = 'var(--coral)';
+      status.textContent = 'COULD NOT SEND — PLEASE EMAIL US INSTEAD.';
+      console.error('Feedback insert failed:', error);
+      return;
+    }
+    btn.innerHTML = '<span>MESSAGE SENT ✓</span><span style="color:var(--ink)">→</span>';
+    btn.style.background = 'var(--mint)';
+    btn.style.color = 'var(--ink)';
+    status.style.color = 'var(--mint)';
+    status.textContent = 'Thanks! We have received your message and will get back to you as soon as we can.';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<span>SEND MESSAGE</span><span class="arr">→</span>';
+      btn.style.background = '';
+      btn.style.color = '';
+      status.textContent = '';
+      e.target.reset();
+      selectRole(document.querySelector('.rchip'));
+    }, 4000);
+  }
+  function openPledge() {
+    window.open(KOFI_URL, '_blank', 'noopener');
+  }
+</script>
 </body>
 </html>

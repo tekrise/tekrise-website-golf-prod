@@ -40,6 +40,7 @@
   <h1 class="legal-title"><span class="hl">PRIVACY</span> POLICY</h1>
   <div class="legal-meta">
     <span><b>Effective:</b> 5 September 2026</span>
+    <span><b>Updated:</b> 2 October 2026</span>
     <span><b>Version:</b> 2026-09-05</span>
     <span><b>Applies to:</b> the TEKRISE app &amp; <span data-site-domain></span></span>
   </div>
@@ -123,7 +124,7 @@
     <ul>
       <li><strong>Swing video clip.</strong> When you record or upload a swing, the app saves
         the full video <strong>on your device</strong> and uploads only a short clip — capped at
-        about 3 seconds — of the swing itself. The full original recording is
+        about 4 seconds — of the swing itself. The full original recording is
         <strong>not</strong> uploaded; it stays on your phone.</li>
       <li><strong>Audio.</strong> Recording hands off to your phone's own camera app, which may
         capture sound. That original — audio and all — <strong>stays on your device</strong>.
@@ -132,8 +133,8 @@
       <li><strong>Movement &amp; technique data.</strong> We process the clip to derive
         body-position ("pose") data and biomechanical measurements such as joint angles and body
         rotation. This describes how you move and is derived from your video.</li>
-      <li><strong>Analysis results.</strong> Your overall score, per-phase scores, the shot
-        type, and the written AI coaching feedback generated for each analysis.</li>
+      <li><strong>Analysis results.</strong> Your overall score, the shot type, and the
+        written AI coaching feedback generated for each analysis.</li>
     </ul>
     <h3>Information collected automatically</h3>
     <ul>
@@ -195,18 +196,44 @@
     <p>We do <strong>not</strong> sell your personal information. We share data only with the
     service providers needed to operate the app, and only for the purposes below.</p>
     <ul>
-      <li><strong>AI coaching provider (Google).</strong> To generate your feedback, we send your
-        short swing video clip together with the movement and technique data derived from it — the
-        body-position ("pose") keypoints and biomechanical measurements — along with the shot type,
-        dominant hand, and gender (when set), to Google's Gemini AI service, which processes it and
-        returns coaching text. We do not send your full original recording; only the short swing
-        clip leaves your device, and it carries no audio. This processing happens on Google's
-        systems and is subject to Google's terms.</li>
+      <li><strong>AI coaching provider.</strong> To generate your feedback, we send your short swing
+        video clip, together with the profile and swing details needed for coaching (such as the
+        shot type, your dominant hand, and your gender when set), to <strong>Google's Gemini
+        AI</strong> (Google LLC), which processes it and returns coaching text. To improve accuracy, we may also
+        send the movement and technique data derived from your clip, such as the body-position
+        ("pose") data shown on your results. We do not send your name or email address. We do not
+        send your full original recording; only the short swing clip leaves your device, and it
+        carries no audio. Google processes this data on our behalf under its Google Cloud
+        data-processing terms, which require it to protect the data and to use it only to provide
+        the service to us. <strong>The app asks for your permission before your first
+        analysis</strong>, and you can withdraw it at any time in your profile ("AI analysis");
+        without it, no clip is sent.
+        To suggest videos after an analysis, we may also send the written coaching text (no video,
+        and no name or email) to the same provider.</li>
+      <li><strong>Video suggestions (YouTube API Services).</strong> TEKRISE may use
+        <strong>YouTube API Services</strong> to suggest YouTube videos related to your coaching
+        feedback. When it does, our servers send YouTube only a short search phrase for a common golf
+        mistake and your app language. We do not send your name, email, account, swing clip, or
+        coaching text, and we do not access or connect to your YouTube or Google account. From
+        YouTube we receive and store only public information about videos (the video ID, title,
+        channel name, and thumbnail link). We refresh it at least every 30 days and remove videos
+        that are no longer available. For each of your analyses we keep which common mistakes it was
+        matched to, so opening the result again doesn't repeat the lookup.
+        When the app shows a suggestion, the thumbnail image loads directly from YouTube's servers,
+        so Google can see your device's IP address. If you tap a video, it opens in the YouTube app
+        or your browser, where YouTube's own terms and privacy practices apply. See the
+        <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of
+        Service</a> and the
+        <a href="https://www.google.com/policies/privacy" target="_blank" rel="noopener">Google
+        Privacy Policy</a>.</li>
       <li><strong>Clip storage (Cloudflare).</strong> Your uploaded swing clips are stored using
         Cloudflare R2 object storage. Clips are not publicly listed or browsable — playback uses
         short-lived links generated for you.</li>
       <li><strong>Hosting and database (Supabase).</strong> Your account data, your analysis
         results, and your usage records are stored with our backend provider.</li>
+      <li><strong>Email delivery (Resend).</strong> Messages you send us through the feedback
+        form in the app or on our website are forwarded to our own inbox by our email delivery
+        provider, so we can read and reply to them.</li>
       <li><strong>Subscriptions (RevenueCat).</strong> If you purchase a subscription, purchase
         and entitlement data is processed by RevenueCat and the relevant app store (Apple App
         Store or Google Play) to manage it.</li>
@@ -291,16 +318,18 @@
         you lose the device or clear the app's data we cannot restore a guest account, because
         there is no email address attached to it. Create an account to keep your history — doing
         so keeps everything you have already analysed.</li>
-      <li>You can ask us to delete your account and associated data at any time — see
-        <a href="/delete-account">Delete your account</a>, which explains how to request it
-        and the 30-day window we work to. When you do, we delete your profile, your uploaded
-        clips, and your analysis history.</li>
+      <li>You can delete your account and associated data at any time <strong>in the app</strong>
+        (Profile → Delete account); it is deleted straight away and we email you a confirmation.
+        You can also ask us by email — see <a href="/delete-account">Delete your account</a>. When
+        you do, we delete your profile, your uploaded clips, and your analysis history. Deleting
+        your account does not cancel an App Store or Google Play subscription; cancel that in your
+        store's settings.</li>
       <li><strong>Some records are kept after deletion.</strong> We keep operational and security
         records of each analysis attempt — including the email address and name on the account at
         the time, and the coaching text that was generated — so that we can investigate abuse,
         diagnose failures, and resolve billing disputes. These records are not anonymous. If you
-        want them removed as well, say so when you make your deletion request and we will remove
-        them unless we are required to keep them.</li>
+        want them removed as well, email us and we will remove them unless we are required to keep
+        them.</li>
       <li>The full original recordings never leave your device, so deleting those is done on your
         phone.</li>
     </ul>
@@ -308,8 +337,8 @@
     <!-- 10 RIGHTS -->
     <h2 id="rights"><span class="n">10</span> Your Rights &amp; Choices</h2>
     <ul>
-      <li>You can edit your profile and change your notification, language, and "Help improve
-        TEKRISE" preferences at any time in the app.</li>
+      <li>You can edit your profile and change your notification, language, "AI analysis", and
+        "Help improve TEKRISE" preferences at any time in the app.</li>
       <li>If you were shown an advertising consent form, your profile has a
         <strong>"Manage ad consent"</strong> option that reopens it, so you can change your
         advertising choices whenever you like. On iOS you can also change tracking permission in
